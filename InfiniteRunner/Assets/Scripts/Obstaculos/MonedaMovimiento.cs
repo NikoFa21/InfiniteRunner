@@ -26,6 +26,7 @@ public class MonedaMovimiento : MonoBehaviour
         if (other.CompareTag("Jugador"))
         {
             Debug.Log("Moneda recogida!");
+            coin_contador.instance.AddCoin();
             Destroy(gameObject);
         }
     }
