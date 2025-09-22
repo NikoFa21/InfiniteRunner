@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaculosMovimiento : MonoBehaviour
+public class MonedaMovimiento : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Velocidad de movimiento
+        public float moveSpeed = 5f; // Velocidad de movimiento
     public float destroyXPosition = -10f; // Punto donde el obst�culo se destruye
 
     void Update()
@@ -18,6 +18,14 @@ public class ObstaculosMovimiento : MonoBehaviour
         // Destruye el obst�culo cuando sale de la pantalla
         if (transform.position.x < destroyXPosition)
         {
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Jugador"))
+        {
+            Debug.Log("Moneda recogida!");
             Destroy(gameObject);
         }
     }

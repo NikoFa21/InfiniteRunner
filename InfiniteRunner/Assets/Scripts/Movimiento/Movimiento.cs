@@ -5,34 +5,47 @@ using UnityEngine;
 public class Movimiento : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float jumpForce = 8f; // Fuerza del salto
-    public float crouchScale = 0.5f; // Tamaño del jugador al agacharse
-    public float crouchDuration = 0.5f; // Duración de la animación de agacharse
+    public float jumpForce = 7f; // Fuerza del salto
+    public float crouchScale = 0.5f; // Tamaï¿½o del jugador al agacharse
+    //public float crouchDuration = 0.5f; // Duraciï¿½n de la animaciï¿½n de agacharse
+    public int maxJumps = 2;
 
     private Rigidbody rb;
     private Vector3 originalScale;
     private bool isGrounded = true;
-    private bool isCrouching = false;
+    //private bool isCrouching = false;
+    private int jumpCount = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalScale = transform.localScale; // Guarda el tamaño original
+        originalScale = transform.localScale; // Guarda el tamaï¿½o original
     }
 
     void Update()
     {
         // Saltar
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
         {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpCount++;
             isGrounded = false;
         }
 
-        // Agacharse
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouching)
+        if (isGrounded == true)
         {
-            StartCoroutine(Crouch());
+            jumpCount = 0;
+        }
+
+        // Agacharse
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            transform.localScale = new Vector3(originalScale.x, originalScale.y *crouchScale, originalScale.z);
+        }
+        else
+        {
+            transform.localScale = originalScale;
         }
     }
 
@@ -44,13 +57,13 @@ public class Movimiento : MonoBehaviour
         }
     }
 
-    // Corrutina para agacharse y volver a su tamaño normal
-    private System.Collections.IEnumerator Crouch()
-    {
-        isCrouching = true;
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * crouchScale, originalScale.z);
-        yield return new WaitForSeconds(crouchDuration);
-        transform.localScale = originalScale;
-        isCrouching = false;
-    }
+    // Corrutina para agacharse y volver a su tamaï¿½o normal
+    // private System.Collections.IEnumerator Crouch()
+    //{
+    //    isCrouching = true;
+    //    transform.localScale = new Vector3(originalScale.x, originalScale.y * crouchScale, originalScale.z);
+    //    yield return new WaitForSeconds(crouchDuration);
+    //    transform.localScale = originalScale;
+    //    isCrouching = false;
+    //}
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3077381895317501408}
   - component: {fileID: 8467598414399902842}
   - component: {fileID: 302976018958804806}
-  - component: {fileID: -8117428490569667920}
+  - component: {fileID: 1162200147382949432}
   m_Layer: 0
   m_Name: Moneda
   m_TagString: Untagged
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8117428490569667920
+--- !u!114 &1162200147382949432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4419403942684429290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d16d10eaed14f41aa7d1166eb850d6, type: 3}
+  m_Script: {fileID: 11500000, guid: e337cfa949df64f4290fd25d378f31b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
